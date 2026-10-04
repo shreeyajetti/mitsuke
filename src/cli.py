@@ -109,7 +109,7 @@ def main(argv=None) -> None:
     if hasattr(sys.stdin, "reconfigure"):
         sys.stdin.reconfigure(encoding="utf-8")
 
-    parser = argparse.ArgumentParser(description="Positional inverted index over Japanese texts (Aozora Bunko)")
+    parser = argparse.ArgumentParser(description="Mitsuke: positional inverted index over Japanese texts (Aozora Bunko)")
     sub = parser.add_subparsers(dest="command", required=True)
 
     p = sub.add_parser("build", help="build the index from data/ and save it to index/")

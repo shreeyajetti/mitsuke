@@ -1,6 +1,8 @@
-# Positional Inverted Index for Japanese Text (青空文庫)
+# Mitsuke (見つけ)
 
-An information-retrieval system in Python that builds a **positional inverted index** over 14 Japanese short stories from [Aozora Bunko (青空文庫)](https://www.aozora.gr.jp/). It supports **AND / OR / NOT**, **phrase**, and **proximity** (`term1 /k term2`) queries. Japanese text is segmented into words with the morphological analyser **fugashi** (MeCab + `unidic-lite`).
+*Japanese full-text search with positional indexing: phrase and proximity queries over Aozora Bunko literature.*
+
+**Mitsuke** (見つけ, from 見つける, "to find") is an information-retrieval system in Python that builds a **positional inverted index** over 14 Japanese short stories from [Aozora Bunko (青空文庫)](https://www.aozora.gr.jp/). It supports **AND / OR / NOT**, **phrase**, and **proximity** (`term1 /k term2`) queries. Japanese text is segmented into words with the morphological analyser **fugashi** (MeCab + `unidic-lite`).
 
 **Built index:** [`index/index.json`](index/index.json) (postings) · [`index/doc_store.json`](index/doc_store.json) (snippet store)
 **Sample run:** [`sample_output.md`](sample_output.md)
