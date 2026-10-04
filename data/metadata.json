@@ -1,0 +1,114 @@
+[
+  {
+    "file": "01_rashomon.txt",
+    "title": "羅生門",
+    "author": "芥川竜之介",
+    "orthography": "新字新仮名",
+    "source_card": "https://www.aozora.gr.jp/cards/000879/card127.html",
+    "source_text": "https://www.aozora.gr.jp/cards/000879/files/127_ruby_150.zip"
+  },
+  {
+    "file": "02_kumo_no_ito.txt",
+    "title": "蜘蛛の糸",
+    "author": "芥川竜之介",
+    "orthography": "新字新仮名",
+    "source_card": "https://www.aozora.gr.jp/cards/000879/card92.html",
+    "source_text": "https://www.aozora.gr.jp/cards/000879/files/92_ruby_164.zip"
+  },
+  {
+    "file": "03_hana.txt",
+    "title": "鼻",
+    "author": "芥川竜之介",
+    "orthography": "新字新仮名",
+    "source_card": "https://www.aozora.gr.jp/cards/000879/card42.html",
+    "source_text": "https://www.aozora.gr.jp/cards/000879/files/42_ruby_154.zip"
+  },
+  {
+    "file": "04_toshishun.txt",
+    "title": "杜子春",
+    "author": "芥川竜之介",
+    "orthography": "新字新仮名",
+    "source_card": "https://www.aozora.gr.jp/cards/000879/card43015.html",
+    "source_text": "https://www.aozora.gr.jp/cards/000879/files/43015_ruby_17393.zip"
+  },
+  {
+    "file": "05_yabu_no_naka.txt",
+    "title": "藪の中",
+    "author": "芥川竜之介",
+    "orthography": "新字新仮名",
+    "source_card": "https://www.aozora.gr.jp/cards/000879/card179.html",
+    "source_text": "https://www.aozora.gr.jp/cards/000879/files/179_ruby_168.zip"
+  },
+  {
+    "file": "06_mikan.txt",
+    "title": "蜜柑",
+    "author": "芥川竜之介",
+    "orthography": "新字新仮名",
+    "source_card": "https://www.aozora.gr.jp/cards/000879/card43017.html",
+    "source_text": "https://www.aozora.gr.jp/cards/000879/files/43017_ruby_17394.zip"
+  },
+  {
+    "file": "07_hashire_merosu.txt",
+    "title": "走れメロス",
+    "author": "太宰治",
+    "orthography": "新字新仮名",
+    "source_card": "https://www.aozora.gr.jp/cards/000035/card1567.html",
+    "source_text": "https://www.aozora.gr.jp/cards/000035/files/1567_ruby_4948.zip"
+  },
+  {
+    "file": "08_chumon_no_ooi_ryoriten.txt",
+    "title": "注文の多い料理店",
+    "author": "宮沢賢治",
+    "orthography": "新字新仮名",
+    "source_card": "https://www.aozora.gr.jp/cards/000081/card43754.html",
+    "source_text": "https://www.aozora.gr.jp/cards/000081/files/43754_ruby_17594.zip"
+  },
+  {
+    "file": "09_yodaka_no_hoshi.txt",
+    "title": "よだかの星",
+    "author": "宮沢賢治",
+    "orthography": "新字新仮名",
+    "source_card": "https://www.aozora.gr.jp/cards/000081/card473.html",
+    "source_text": "https://www.aozora.gr.jp/cards/000081/files/473_ruby_467.zip"
+  },
+  {
+    "file": "10_gongitsune.txt",
+    "title": "ごん狐",
+    "author": "新美南吉",
+    "orthography": "新字新仮名",
+    "source_card": "https://www.aozora.gr.jp/cards/000121/card628.html",
+    "source_text": "https://www.aozora.gr.jp/cards/000121/files/628_ruby_649.zip"
+  },
+  {
+    "file": "11_tebukuro_wo_kaini.txt",
+    "title": "手袋を買いに",
+    "author": "新美南吉",
+    "orthography": "新字新仮名",
+    "source_card": "https://www.aozora.gr.jp/cards/000121/card637.html",
+    "source_text": "https://www.aozora.gr.jp/cards/000121/files/637_ruby_4095.zip"
+  },
+  {
+    "file": "12_takasebune.txt",
+    "title": "高瀬舟",
+    "author": "森鴎外",
+    "orthography": "新字新仮名",
+    "source_card": "https://www.aozora.gr.jp/cards/000129/card45245.html",
+    "source_text": "https://www.aozora.gr.jp/cards/000129/files/45245_ruby_21882.zip"
+  },
+  {
+    "file": "13_remon.txt",
+    "title": "檸檬",
+    "author": "梶井基次郎",
+    "orthography": "新字新仮名",
+    "source_card": "https://www.aozora.gr.jp/cards/000074/card424.html",
+    "source_text": "https://www.aozora.gr.jp/cards/000074/files/424_ruby_19825.zip"
+  },
+  {
+    "file": "14_yume_juya.txt",
+    "title": "夢十夜",
+    "author": "夏目漱石",
+    "orthography": "新字新仮名",
+    "source_card": "https://www.aozora.gr.jp/cards/000148/card799.html",
+    "source_text": "https://www.aozora.gr.jp/cards/000148/files/799_ruby_6024.zip"
+  }
+]
