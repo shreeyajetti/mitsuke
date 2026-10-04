@@ -224,6 +224,8 @@ python -m src.cli tokenize "日本語の文"  # show how text is segmented and n
 
 Precedence: `NOT` > `AND` > `OR`. Every word in a query goes through the same tokenizer and normalizer as the documents. So `ＭＥＲＯＳ` and `meros` are the same term, and an **unquoted** word that fugashi splits into several tokens is searched as a phrase. For example, `羅生門` is tokenized as `羅生 門`.
 
+> **Windows PowerShell:** PowerShell 5.1 strips double quotes inside a command-line argument. For example, `search '"下人 行方"'` arrives as `下人 行方` and runs as an AND query (45 matches instead of a phrase). Use Japanese brackets for phrases on the command line, e.g. `python -m src.cli search 「下人の行方」`, or type queries at the interactive prompt, where `"..."` works as normal. Full-width parentheses `（ ）` also work for grouping.
+
 Each result shows the document, the number of matches, and for each match its term positions and a snippet of the original text with the match in 【】. Results are ordered by number of matches. `NOT` excludes documents but has no positions to highlight.
 
 **Boolean:**
