@@ -3,3 +3,7 @@ __pycache__/
 *.pyc
 .cache/
 history/
+
+# Large generated files: rebuild with `python -m src.fetch_miracl` and `python -m src.cli build`
+data/passages.jsonl
+index/

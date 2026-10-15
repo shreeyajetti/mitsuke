@@ -9,6 +9,7 @@ positions stored in the postings.
 from dataclasses import dataclass
 
 from .indexer import InvertedIndex
+from .normalizer import analyze
 from .query import And, Not, Or, Phrase, Proximity, parse_query
 
 Matches = dict[int, list[tuple[int, int]]]
@@ -17,8 +18,8 @@ Matches = dict[int, list[tuple[int, int]]]
 @dataclass
 class SearchResult:
     doc_id: int
+    docid: str  # MIRACL passage ID
     title: str
-    author: str
     matches: list[tuple[int, int]]  # (first_position, last_position), inclusive
 
 
@@ -92,19 +93,32 @@ def search(index: InvertedIndex, query: str) -> list[SearchResult]:
     """Parse and run a query; results are ordered by number of matches, then doc ID."""
     matches = evaluate(index, parse_query(query))
     results = [
-        SearchResult(d, index.docs[d]["title"], index.docs[d]["author"], spans) for d, spans in matches.items()
+        SearchResult(d, index.docs[d]["docid"], index.docs[d]["title"], spans) for d, spans in matches.items()
     ]
     results.sort(key=lambda r: (-len(r.matches), r.doc_id))
     return results
 
 
-def snippet(index: InvertedIndex, doc_id: int, match: tuple[int, int], context: int = 15) -> str:
-    """Original text around a match, with the matched span wrapped in 【】."""
-    entry = index.store.get(doc_id)
-    if entry is None:
+def snippet(index: InvertedIndex, doc_id: int, match: tuple[int, int], context: int = 30) -> str:
+    """Original text around a match, with the matched span wrapped in 【】.
+
+    Character offsets are not stored in the index; the one displayed passage
+    is re-analyzed, which gives exactly the same positions as at build time.
+    """
+    text = index.store.get(doc_id)
+    if text is None:
         return ""
-    text, spans = entry["text"], entry["spans"]
-    start, end = spans[match[0]][0], spans[match[1]][1]
-    before = text[max(0, start - context) : start]
-    after = text[end : end + context]
+    terms = analyze(text)
+    start, end = terms[match[0]].token.start, terms[match[1]].token.end
+    # Snap the context edges to whitespace so a snippet never starts or ends
+    # in the middle of a word (e.g. with a dangling vowel sign).
+    left = max(0, start - context)
+    if left > 0:
+        space = text.find(" ", left, start)
+        left = space + 1 if space != -1 else start
+    right = min(len(text), end + context)
+    if right < len(text):
+        space = text.rfind(" ", end, right)
+        right = space if space != -1 else end
+    before, after = text[left:start], text[end:right]
     return " ".join(f"…{before}【{text[start:end]}】{after}…".split())

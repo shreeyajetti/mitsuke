@@ -5,13 +5,14 @@ Format: JSON, chosen over pickle because
 - it is language-independent, and
 - loading it cannot execute arbitrary code (unpickling untrusted files can).
 
-Japanese text: files are always opened with encoding="utf-8" (the Windows
-default would be cp1252/cp932) and written with ensure_ascii=False, so terms
-appear as 下人 rather than "\\u4e0b\\u4eba" escape sequences.
+Telugu text: files are always opened with encoding="utf-8" (the Windows
+default would be cp1252) and written with ensure_ascii=False, so terms
+appear as గుంటూరు rather than "\\u0c17\\u0c41..." escape sequences, which
+also keeps the file about half the size.
 
 Two files are written to the index directory:
 - index.json      meta + document table + positional postings (the inverted index)
-- doc_store.json  original text and per-position character spans, used only for snippets
+- doc_store.json  the indexed text of each passage, used only for snippets
 """
 
 import json

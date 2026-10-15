@@ -2,18 +2,19 @@
 
 Syntax (operators are upper-case ASCII and must be separated by spaces):
 
-    下人 AND 老婆          both terms in the document
-    メロス OR セリヌンティウス  either term
-    下人 AND NOT 老婆      first but not second
-    "下人の行方"            phrase: terms adjacent and in this order
-    下人 /5 太刀           proximity: within 5 positions, either order
-    (猫 OR 狐) AND 森       parentheses for grouping
-    猫 森                  implicit AND
+    గుంటూరు AND జిల్లా          both terms in the document
+    ఇంటికి OR ఇంట్లో             either term
+    గుంటూరు AND NOT జిల్లా      first but not second
+    "తెలుగు సినిమా"              phrase: terms adjacent and in this order
+    సినిమా /3 దర్శకత్వం          proximity: within 3 positions, either order
+    (సినిమా OR నాటకం) AND నటి   parentheses for grouping
+    గుంటూరు జిల్లా               implicit AND
 
 Every word or quoted phrase is run through the SAME analyze() pipeline as
-the documents (fugashi tokenization + normalization). Japanese has no spaces,
-so an unquoted word like 走れメロス may produce several tokens; it is then
-treated as a phrase, which is what the user meant.
+the documents (tokenization + normalization), so హెమింగ్వే matches the
+article's హెమింగ్<ZWNJ>వే (written with an invisible ZWNJ). An unquoted word that
+contains punctuation, like కి.మీ, produces several tokens; it is then treated
+as a phrase, which is what the user meant.
 
 Grammar:
     expr    := and_expr ("OR" and_expr)*

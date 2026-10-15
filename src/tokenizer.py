@@ -1,48 +1,51 @@
-"""Stage 1 of the pipeline: Japanese morphological tokenization with fugashi.
+r"""Stage 1 of the pipeline: split Telugu text into word tokens.
 
-Japanese is written without spaces between words, so `str.split()` would
-return whole sentences. fugashi wraps the MeCab morphological analyser and,
-with the unidic-lite dictionary, segments text into words (morphemes):
+Telugu separates words with spaces, but neither obvious approach works:
 
-    吾輩は猫である。 -> 吾輩 / は / 猫 / で / ある / 。
+- str.split() leaves punctuation and invisible characters attached:
+      "కి.మీ."  and  "విక్రమ్\u200c"  (with a zero-width non-joiner at the end)
+- the regex \w+ treats Telugu vowel signs (combining marks) as non-word
+  characters and shreds every word:
+      విక్రమ్ -> వ / క / రమ
 
-Each token also records its character offsets in the original text so that
-search results can later show a snippet of the original document.
+A Telugu syllable is a consonant plus vowel signs and the virama (్), which
+Unicode classifies as *marks* (category M), not letters. So a token here is a
+maximal run of letters (L), marks (M), numbers (N) and the zero-width
+joiners U+200C/U+200D. Everything else (spaces, punctuation, symbols)
+separates tokens.
+
+Each token records its character offsets so search results can show a
+snippet of the original text.
 """
 
+import unicodedata
 from dataclasses import dataclass
 
-import fugashi
-
-_tagger = None
+ZERO_WIDTH_JOINERS = {"\u200c", "\u200d"}  # ZWNJ, ZWJ
 
 
 @dataclass(frozen=True)
 class Token:
     surface: str  # the word exactly as written in the text
-    lemma: str  # dictionary form (kept for display/debugging; not indexed)
-    pos: str  # coarse part of speech, e.g. 名詞 (noun), 助詞 (particle)
     start: int  # character offset in the original text (inclusive)
     end: int  # character offset in the original text (exclusive)
 
 
-def get_tagger() -> fugashi.Tagger:
-    """Create the MeCab tagger once; loading the dictionary is slow."""
-    global _tagger
-    if _tagger is None:
-        _tagger = fugashi.Tagger()
-    return _tagger
+def is_word_char(ch: str) -> bool:
+    return unicodedata.category(ch)[0] in "LMN" or ch in ZERO_WIDTH_JOINERS
 
 
 def tokenize(text: str) -> list[Token]:
-    """Segment Japanese text into a list of Tokens (punctuation included)."""
+    """Split text into word tokens with their character offsets."""
     tokens = []
-    offset = 0
-    for word in get_tagger()(text):
-        # MeCab skips whitespace before a word and reports it separately.
-        offset += len(word.white_space)
-        start, end = offset, offset + len(word.surface)
-        offset = end
-        lemma = word.feature.lemma or word.surface  # unknown words have no lemma
-        tokens.append(Token(word.surface, lemma, word.feature.pos1, start, end))
+    start = None
+    for i, ch in enumerate(text):
+        if is_word_char(ch):
+            if start is None:
+                start = i
+        elif start is not None:
+            tokens.append(Token(text[start:i], start, i))
+            start = None
+    if start is not None:
+        tokens.append(Token(text[start:], start, len(text)))
     return tokens

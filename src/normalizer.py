@@ -1,19 +1,25 @@
-"""Stage 2 of the pipeline: normalization of tokens into index terms.
+"""Stage 2 of the pipeline: normalize tokens into index terms.
 
-- Unicode NFKC folds full-width/half-width variants into one form:
-  ＡＢＣ -> ABC, １２３ -> 123, ｶﾀｶﾅ -> カタカナ
-- Latin letters are lowercased.
-- Tokens made only of punctuation, symbols or whitespace (。、「」！…) are
-  dropped, so they do not occupy positions in the index.
+- Zero-width joiners (U+200C ZWNJ, U+200D ZWJ) are removed. They only change
+  how a word is *rendered*, but 17% of passages contain them, and without
+  removal విక్రమ్\u200c (with ZWNJ) and విక్రమ్ (without) would be different terms.
+- Unicode NFKC composes equivalent character sequences into one form
+  (e.g. ె + ౖ  ->  ై ) and folds full-width Latin letters and digits.
+- Telugu digits ౦-౯ become ASCII 0-9, so ౨౦౧౧ and 2011 match.
+- Latin letters are lowercased (about 10% of passages contain English words).
+- Tokens left with no letters or numbers are dropped.
 
-Particles such as は/の/が are deliberately NOT removed as stop words:
-phrase queries like 下人の行方 need them to stay in the position sequence.
+No suffix stripping or stop-word removal yet: ఇంటికి ("to the house") and
+ఇల్లు ("house") are still different terms. Measuring that gap and closing
+it comes in a later stage.
 """
 
 import unicodedata
 from dataclasses import dataclass
 
-from .tokenizer import Token, tokenize
+from .tokenizer import ZERO_WIDTH_JOINERS, Token, tokenize
+
+TELUGU_DIGITS = str.maketrans("౦౧౨౩౪౫౬౭౮౯", "0123456789")
 
 
 @dataclass(frozen=True)
@@ -23,21 +29,21 @@ class Term:
 
 
 def normalize_text(text: str) -> str:
-    """Fold full-width/half-width variants and lowercase Latin letters."""
-    return unicodedata.normalize("NFKC", text).lower().strip()
+    text = "".join(ch for ch in text if ch not in ZERO_WIDTH_JOINERS)
+    text = unicodedata.normalize("NFKC", text)
+    return text.translate(TELUGU_DIGITS).lower()
 
 
-def is_punctuation(text: str) -> bool:
-    """True if every character is punctuation (P*), a symbol (S*) or a separator/control (Z*, C*)."""
-    return all(unicodedata.category(ch)[0] in "PSZC" for ch in text)
+def has_content(text: str) -> bool:
+    """True if the text contains at least one letter or number."""
+    return any(unicodedata.category(ch)[0] in "LN" for ch in text)
 
 
 def normalize(tokens: list[Token]) -> list[Term]:
-    """Turn tokens into index terms, dropping punctuation-only tokens."""
     terms = []
     for token in tokens:
         term = normalize_text(token.surface)
-        if term and not is_punctuation(term):
+        if has_content(term):
             terms.append(Term(term, token))
     return terms
 
