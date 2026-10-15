@@ -160,7 +160,7 @@ Pickle would be smaller and faster to load, but at about 0.1 s for this collecti
 **Japanese text encoding:**
 
 - Every file is read and written with an explicit `encoding="utf-8"`. Python on Windows otherwise defaults to cp1252/cp932.
-- JSON is written with `ensure_ascii=False`, so terms are stored as readable `"下人"` rather than `"下人"`.
+- JSON is written with `ensure_ascii=False`, so terms are stored as readable `"下人"` rather than `"\u4e0b\u4eba"`.
 - The source texts are Shift_JIS and are converted to UTF-8 once, at fetch time.
 - The JSON has one term per line, so the file can be read in a browser and diffs cleanly. JSON object keys must be strings, so doc IDs are written as `"0"` and converted back to `int` when loading.
 
