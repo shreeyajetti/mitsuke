@@ -131,7 +131,7 @@ python -m src.cli build                  # defaults: --data data --index index
 
 ```
 Loaded 29,268 passages from 2,446 articles in data/
-Indexed 29,268 docs: 208,970 distinct terms, 1,347,104 postings, 1,733,583 positions in 13.27s
+Indexed 29,268 docs, 208,970 distinct terms, 1,347,104 postings, 1,733,583 positions in 13.27s
 Saved index to index/index.json
 ```
 

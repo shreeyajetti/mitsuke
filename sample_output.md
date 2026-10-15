@@ -7,7 +7,7 @@ Produced by running the commands shown against the MIRACL Telugu subset in `data
 ```
 $ python -m src.cli build
 Loaded 29,268 passages from 2,446 articles in data/
-Indexed 29,268 docs:208,970 distinct terms, 1,347,104 postings, 1,733,583 positions in 11.71s
+Indexed 29,268 docs, 208,970 distinct terms, 1,347,104 postings, 1,733,583 positions in 12.32s
 Saved index to index/index.json
 ```
 
@@ -41,7 +41,7 @@ Input: విక్రమ్<ZWNJ> సారాభాయ్ అంతరిక�
 
 ```
 $ python -m src.cli stats --term ఇల్లు ఇంటికి --limit 3
-Loaded index from index/ in 2.475s (no re-tokenization)
+Loaded index from index/ in 2.534s (no re-tokenization)
   language: Telugu
   collection: MIRACL v1.0 Telugu (subset)
   tokenizer: Unicode letter/mark/number runs

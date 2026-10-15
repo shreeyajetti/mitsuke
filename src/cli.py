@@ -28,7 +28,7 @@ def cmd_build(args) -> None:
     path = save_index(index, args.index)
     m = index.meta
     print(
-        f"Indexed {m['num_docs']:,} docs:{m['num_terms']:,} distinct terms, "
+        f"Indexed {m['num_docs']:,} docs, {m['num_terms']:,} distinct terms, "
         f"{m['num_postings']:,} postings, {m['num_positions']:,} positions "
         f"in {time.perf_counter() - started:.2f}s"
     )
