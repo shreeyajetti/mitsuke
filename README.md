@@ -1,22 +1,25 @@
-# Mitsuke (見つけ)
+# Mitsuke
 
-*A multilingual full-text search engine with positional indexing, built for languages where "split on spaces" isn't enough.*
+*A Telugu full-text search engine with positional indexing.*
 
-> **Status: in transition.** Mitsuke started as a university Information Retrieval project over Japanese literature. It is being rebuilt so that the index and search are language-independent, with each language plugged in as its own analyzer. The code in `src/` is still the original Japanese engine until that refactor lands.
+> **Status: early development.** The code in `src/` is the positional-index engine from my Information Retrieval course project (originally built for Japanese). It is being adapted to Telugu. The graded course version is preserved at the git tag [`v1.0-course-project`](https://github.com/shreeyajetti/mitsuke/tree/v1.0-course-project).
 
-## Course project (Japanese)
+## Why Telugu is interesting for search
 
-The graded version is preserved exactly as submitted:
+Telugu attaches suffixes directly to words, and the stem itself can change:
 
-- **Folder:** [`course-project/`](course-project/README.md), a frozen, runnable copy with full documentation
-- **Git tag:** [`v1.0-course-project`](https://github.com/shreeyajetti/mitsuke/tree/v1.0-course-project)
+| Telugu | Meaning |
+|---|---|
+| ఇల్లు | house |
+| ఇంటికి | to the house |
+| ఇంట్లో | in the house |
 
-That version covers a positional inverted index over 14 Aozora Bunko short stories, fugashi (MeCab) tokenization, AND/OR/NOT, phrase and proximity queries.
+A search for ఇల్లు should find all three. Exact word matching finds only the first, and simply stripping suffixes doesn't connect ఇల్లు with ఇంటి-. Handling this well, and measuring how well, is the core of the project.
 
 ## Roadmap
 
-1. **Shared core.** Separate the language-independent index/search code from the language-specific tokenizer and normalizer.
-2. **Telugu first.** Telugu attaches suffixes to words: ఇల్లు (house) → ఇంటికి (to the house) → ఇంట్లో (in the house). Search has to match those forms to each other. Documents and judged test queries come from the [MIRACL](https://huggingface.co/datasets/miracl/miracl) Telugu retrieval benchmark, so retrieval quality can be measured from day one.
-3. **Ranking and evaluation.** BM25 ranking, plus recall/precision on the benchmark queries.
-4. **Japanese back in, with English glosses.** Tokens and snippets shown with English meanings, so non-Japanese readers can follow what is retrieved.
-5. **Later: cross-lingual search.** Type a query in English and retrieve Japanese or Telugu documents.
+1. **Telugu analyzer.** Word splitting plus Telugu-specific Unicode normalization (vowel signs, zero-width joiners).
+2. **Data.** Documents and judged test queries from the [MIRACL](https://huggingface.co/datasets/miracl/miracl) Telugu retrieval benchmark (Telugu Wikipedia, Apache-2.0).
+3. **Evaluation.** Measure recall on the benchmark queries before changing anything.
+4. **Suffix handling.** Stemming and/or character n-grams, measured against the baseline.
+5. **Ranking.** BM25.
