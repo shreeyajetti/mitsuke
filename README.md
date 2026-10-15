@@ -1,8 +1,8 @@
-# Mitsuke
+# Kanipettu (కనిపెట్టు)
 
 *A Telugu full-text search engine with positional indexing.*
 
-> **Status: early development.** The code in `src/` is the positional-index engine from my Information Retrieval course project (originally built for Japanese). It is being adapted to Telugu. The graded course version is preserved at the git tag [`v1.0-course-project`](https://github.com/shreeyajetti/mitsuke/tree/v1.0-course-project).
+> **Status: early development.** The code in `src/` is the positional-index engine from my Information Retrieval course project (originally built for Japanese). It is being adapted to Telugu. The graded course version is preserved at the git tag [`v1.0-course-project`](https://github.com/shreeyajetti/kanipettu/tree/v1.0-course-project).
 
 ## Why Telugu is interesting for search
 
