@@ -111,7 +111,7 @@ def main(argv=None) -> None:
     if hasattr(sys.stdin, "reconfigure"):
         sys.stdin.reconfigure(encoding="utf-8")
 
-    parser = argparse.ArgumentParser(description="Kanipettu: positional inverted index search engine")
+    parser = argparse.ArgumentParser(description="Anveshinchu: positional inverted index search engine")
     sub = parser.add_subparsers(dest="command", required=True)
 
     p = sub.add_parser("build", help="build the index from data/ and save it to index/")

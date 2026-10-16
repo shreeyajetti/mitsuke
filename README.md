@@ -1,12 +1,12 @@
-# Kanipettu (కనిపెట్టు)
+# Anveshinchu (అన్వేషించు)
 
 *A Telugu full-text search engine with a positional inverted index, supporting boolean, phrase and proximity queries.*
 
-**Kanipettu** (కనిపెట్టు, "find out / discover") indexes Telugu Wikipedia passages from the [MIRACL](https://huggingface.co/datasets/miracl/miracl) retrieval benchmark. It uses only the Python standard library.
+**Anveshinchu** (అన్వేషించు, "to search / explore") indexes Telugu Wikipedia passages from the [MIRACL](https://huggingface.co/datasets/miracl/miracl) retrieval benchmark. It uses only the Python standard library.
 
 **Sample run:** [`sample_output.md`](sample_output.md)
 
-> The positional-index engine started as my Information Retrieval course project over Japanese literature. That graded version is preserved at the git tag [`v1.0-course-project`](https://github.com/shreeyajetti/kanipettu/tree/v1.0-course-project).
+> The positional-index engine started as my Information Retrieval course project over Japanese literature. That graded version is preserved at the git tag [`v1.0-course-project`](https://github.com/shreeyajetti/anveshinchu/tree/v1.0-course-project).
 
 ---
 
